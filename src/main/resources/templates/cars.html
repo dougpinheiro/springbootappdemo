@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Spring framework Thymeleaf example</title>
+</head>
+<body>
+	<h1>Car List</h1>
+	<table id="table-1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Brand</th>
+				<th>Model</th>
+				<th>Registration</th>
+				<th>Month</th>
+				<th>Year</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="car:${cars}">
+				<td th:text="${car.id}"></td>
+				<td th:text="${car.model.brand.name}"></td>
+				<td th:text="${car.model.name}"></td>
+				<td th:text="${car.registration}"></td>
+				<td th:text="${car.month}"></td>
+				<td th:text="${car.year}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
