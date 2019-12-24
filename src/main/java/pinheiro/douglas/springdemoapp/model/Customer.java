@@ -42,6 +42,13 @@ public class Customer {
 		this.nif = nif;
 		this.cars = cars;
 	}
+	
+	public Customer(String name, String email, String nif) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.nif = nif;
+	}
 
 
 

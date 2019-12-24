@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Car {
@@ -17,29 +18,27 @@ public class Car {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private String brand;
-	private String model;
+	
+	@OneToOne
+	private Model model;
+	
 	private String registration;
-	private short year;
-	private byte month;
+	private Short year;
+	private Byte month;
 	
 	@ManyToMany
 	@JoinTable(name="rentals", joinColumns=@JoinColumn(name="car_id"), inverseJoinColumns=@JoinColumn(name="customer_id"))
 	private Set<Customer> customers = new HashSet<>();
 
-	public Long getId() {
-		return id;
-	}
 
 	public Car() {
 		super();
 	}
 	
-	public Car(Long id, String brand, String model, String registration, short year, byte month,
+	public Car(Long id, Model model, String registration, Short year, Byte month,
 			Set<Customer> customers) {
 		super();
 		this.id = id;
-		this.brand = brand;
 		this.model = model;
 		this.registration = registration;
 		this.year = year;
@@ -47,34 +46,37 @@ public class Car {
 		this.customers = customers;
 	}
 
-	public Car(String brand, String model, String registration, short year, byte month,
+	public Car(Model model, String registration, Short year, Byte month,
 			Set<Customer> customers) {
 		super();
-		this.brand = brand;
 		this.model = model;
 		this.registration = registration;
 		this.year = year;
 		this.month = month;
 		this.customers = customers;
+	}
+	
+	public Car(Model model, String registration, Short year, Byte month) {
+		super();
+		this.model = model;
+		this.registration = registration;
+		this.year = year;
+		this.month = month;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getBrand() {
-		return brand;
+	public Long getId() {
+		return id;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getModel() {
+	public Model getModel() {
 		return model;
 	}
 
-	public void setModel(String model) {
+	public void setModel(Model model) {
 		this.model = model;
 	}
 
@@ -86,19 +88,19 @@ public class Car {
 		this.registration = registration;
 	}
 
-	public short getYear() {
+	public Short getYear() {
 		return year;
 	}
 
-	public void setYear(short year) {
+	public void setYear(Short year) {
 		this.year = year;
 	}
 
-	public byte getMonth() {
+	public Byte getMonth() {
 		return month;
 	}
 
-	public void setMonth(byte month) {
+	public void setMonth(Byte month) {
 		this.month = month;
 	}
 
@@ -135,11 +137,7 @@ public class Car {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Car [id=" + id + ", brand=" + brand + ", model=" + model + ", registration=" + registration + ", year="
-				+ year + ", month=" + month + ", customers=" + customers + "]";
-	}
+	
 	
 	
 }
